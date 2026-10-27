@@ -1,0 +1,54 @@
+{
+    "name": "aisdk/typesafe",
+    "description": "Native TypeSafe Jev decisions for the framework-agnostic PHP AI SDK.",
+    "license": "MIT",
+    "keywords": [
+        "ai",
+        "aisdk",
+        "decisions",
+        "typesafe"
+    ],
+    "homepage": "https://github.com/phpaisdk/typesafe",
+    "require": {
+        "php": "^8.3",
+        "aisdk/core": "^0.10.0"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.18",
+        "nyholm/psr7": "^1.8",
+        "pestphp/pest": "^3.0 || ^4.0",
+        "phpstan/phpstan": "^2.0",
+        "rector/rector": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "AiSdk\\": "src/Root/",
+            "AiSdk\\TypeSafe\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "AiSdk\\TypeSafe\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "lint": "vendor/bin/pint --test",
+        "format": "vendor/bin/pint",
+        "analyze": "vendor/bin/phpstan analyze --memory-limit=512M",
+        "refactor:dry": "vendor/bin/rector process --dry-run",
+        "refactor": "vendor/bin/rector process",
+        "test": "vendor/bin/pest",
+        "test:all": [
+            "@lint",
+            "@analyze",
+            "@test"
+        ]
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "php-http/discovery": true
+        }
+    }
+}
