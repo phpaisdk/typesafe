@@ -49,7 +49,7 @@ it('rejects unsupported image assets before making an HTTP request', function ()
     };
     $factory = new Psr17Factory();
     TypeSafe::create(['apiKey' => 'test', 'sdk' => new Sdk($http, $factory, $factory)]);
-    expect(fn() => Generate::decision('image')->model(TypeSafe::model('opaque'))->images(\AiSdk\Content::image('https://example.test/a.png'))->questions(Question::predicate('q', 'What?'))->run())->toThrow(InvalidArgumentException::class);
+    expect(fn() => Generate::decision('image')->model(TypeSafe::model('opaque'))->images(\AiSdk\Content::image('https://example.test/a.png'))->questions(Question::predicate('q', 'What?'))->run())->toThrow(AiSdk\Exceptions\InvalidArgumentException::class);
     expect($http->calls)->toBe(0);
     TypeSafe::reset();
 });

@@ -7,6 +7,7 @@ namespace AiSdk\TypeSafe\Models;
 use AiSdk\Contracts\BaseModel;
 use AiSdk\Contracts\DecisionModelInterface;
 use AiSdk\Decisions\Answer;
+use AiSdk\Exceptions\InvalidArgumentException;
 use AiSdk\Exceptions\InvalidResponseException;
 use AiSdk\Requests\DecisionModelRequest;
 use AiSdk\Responses\DecisionModelResponse;
@@ -27,12 +28,12 @@ final class TypeSafeDecisionModel extends BaseModel implements DecisionModelInte
     public function decide(DecisionModelRequest $request): DecisionModelResponse
     {
         if ($request->images !== []) {
-            throw new \InvalidArgumentException('This TypeSafe adapter currently supports text and JSON evidence only.');
+            throw new InvalidArgumentException('This TypeSafe adapter currently supports text and JSON evidence only.');
         }
         $questions = [];
         foreach ($request->questions as $question) {
             if (! is_string($question->instructions)) {
-                throw new \InvalidArgumentException('This TypeSafe adapter requires text question instructions.');
+                throw new InvalidArgumentException('This TypeSafe adapter requires text question instructions.');
             }
             $item = ['type' => $question->kind === 'predicate' ? 'noul' : $question->kind, 'instructions' => $question->instructions];
             if ($question->kind === 'choice') {
@@ -45,7 +46,7 @@ final class TypeSafeDecisionModel extends BaseModel implements DecisionModelInte
         }
         foreach (['model', 'state', 'questions'] as $reserved) {
             if (array_key_exists($reserved, $request->providerOptions)) {
-                throw new \InvalidArgumentException('Provider options cannot replace decision model, state or questions.');
+                throw new InvalidArgumentException('Provider options cannot replace decision model, state or questions.');
             }
         }
         $payload = $this->runner($this->sdk)->postJson(rtrim($this->baseUrl, '/') . '/systemone', ['model' => $this->id, 'state' => $request->input, 'questions' => (object) $questions] + $request->providerOptions, ['Authorization' => 'Bearer ' . $this->apiKey], $this->provider());
