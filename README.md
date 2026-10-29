@@ -1,6 +1,6 @@
 # aisdk/typesafe
 
-Native Jev decisions for framework-agnostic PHP 8.3+. This package is prepared for the SDK's stable 0.10.0 line and has not been published.
+Native Jev decisions for framework-agnostic PHP 8.3+. Requires `aisdk/core ^0.10.0`.
 
 ```php
 use AiSdk\Generate;
@@ -25,4 +25,4 @@ Configuration accepts `apiKey`, `baseUrl`, and an optional core `Sdk` containing
 
 Source contracts: [TypeSafe introduction](https://docs.typesafe.ai/introduction), [quick start and native HTTP examples](https://docs.typesafe.ai/introduction/quickstart). Model ids are opaque; the provider determines availability.
 
-Run `composer test:all` after installing dependencies. Until core 0.10.0 is published, use a local Composer path repository for `aisdk/core` with version `0.10.0`.
+Run `composer test:all` after installing dependencies.
