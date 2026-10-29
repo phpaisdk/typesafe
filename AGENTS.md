@@ -43,3 +43,7 @@ composer test      # pest
 - Default tests never touch the network; use a fake PSR-18 client and `Generate::configure(new Sdk(...))`.
 - `tests/LiveTest.php` is skipped unless `AISDK_LIVE_TYPESAFE=1` and `TYPESAFE_API_KEY` are set. It spends credits; run it only when asked.
 - Do not edit `vendor/`. If a test needs unreleased core behavior, run it against the local core checkout.
+
+## Changelog
+
+Keep `CHANGELOG.md` current: add short, user-facing entries (what users can do now, dependency compatibility) for every release. Release notes on GitHub should match.
