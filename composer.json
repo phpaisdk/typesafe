@@ -11,7 +11,7 @@
     "homepage": "https://github.com/phpaisdk/typesafe",
     "require": {
         "php": "^8.3",
-        "aisdk/core": "^0.10.1"
+        "aisdk/core": "^0.11.0"
     },
     "require-dev": {
         "laravel/pint": "^1.18",
